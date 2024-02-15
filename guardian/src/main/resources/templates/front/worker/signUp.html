@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>회원가입</title>
+</head>
+<script type="text/javascript">
+    function setImageFromFile(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function (e) {
+                $(".join_profile_img").css("display", "none");
+                $(".join_profile").css({ "background": "url(" + e.target.result + ")" });
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    // $("#file2").on('change', function () {
+    //     var fileName = $("#file2").val();
+    //     $(".upload-name").val(fileName);
+    //     alert(fileName);
+    // });
+
+
+    function fileChange() {
+        var fileName = $("#file2").val();
+        $(".upload-name").val(fileName);
+    }
+
+</script>
+
+<script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script>
+    // findAddr() 함수 정의
+    function findAddr() {
+        new daum.Postcode({
+            oncomplete: function (data) {
+                // 사용자 주소를 받아올 변수를 정의한다.
+                var addr = '';
+
+                //사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+                if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우(R)
+                    addr = data.roadAddress;
+                } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                    addr = data.jibunAddress;
+                }
+
+                var addlist = addr.split(' ');
+
+                // 부모창의 주소칸에 받아온 주소를 넣는다.
+                $(".upload-add").val(addr);
+                $(".add1").val(addlist[0]);
+                $(".add2").val(addlist[1]);
+
+            }
+        }).open();
+    }
+</script>
+
+<body>
+<div class="mainicon">
+    <img src="/img/icon.jpg" class="iconimg">
+</div>
+    <form action="/worker/signUp" method="post" enctype="multipart/form-data" id="frm">
+        <div class="join_title">
+            요양보호사 회원가입
+        </div>
+
+        <!-- 회원가입 프로필 사진 -->
+        <div class="join_profile_wrap">
+            <div class="join_profile">
+                <img src="/img/user_1.png" class="join_profile_img">
+                <div class="join_pofile_camera_wrap">
+                    <label>
+                        <input type="file" name="selfieImg" accept="image/*" onchange="setImageFromFile(this)"
+                            class="join_pofile_camera" multiple>
+                        <img src="/img/premium-icon-camera-3512315_id.png">
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- 회원가입 INPUT -->
+        <div class="join_input_title">이름</div>
+        <div class="join_input_wrap">
+            <input type="text" required class="join_input" name="name" placeholder="이름을 입력해 주세요.">
+            <input type="hidden" name="camera" value="1">
+        </div>
+
+        <div class="join_input_title">전화번호</div>
+        <div class="join_input_wrap">
+            <input type="text" required class="join_input" name="phone" placeholder="전화번호를 입력해 주세요.">
+        </div>
+
+        <div class="join_input_title">성별</div>
+        <div class="join_input_wrap">
+            <div id="align">
+                <input type="radio" id="radio1" name="sex" value="남" checked="checked">
+                <label for="radio1" id="lab">남</label>
+                <input type="radio" id="radio2" name="sex" value="여">
+                <label for="radio2" id="lab">여</label>
+            </div>
+
+        </div>
+
+        <div class="join_input_title">주소</div>
+        <div class="join_input_wrap">
+            <div class="filebox">
+                <input class="upload-add" placeholder="주소를 입력해 주세요" readonly>
+                <label for="add" onclick="findAddr()">검색</label>
+                <input type="hidden" id="add">
+                <input type="hidden" class="add1" name="address1">
+                <input type="hidden" class="add2" name="address2">
+            </div>
+        </div>
+
+
+        <div class="join_input_title">자격증</div>
+        <div class="join_input_wrap">
+            <div class="filebox">
+                <input class="upload-name" placeholder="자격증을 등록해 주세요">
+                <label for="file2">등록</label>
+                <input type="file" id="file2" onchange="fileChange()" name="licenseImg" required>
+            </div>
+        </div>
+
+        <div class="join_input_wrap">
+            <input type="submit" class="join_submit" value="확인">
+        </div>
+    </form>
+</body>
+
+</html>

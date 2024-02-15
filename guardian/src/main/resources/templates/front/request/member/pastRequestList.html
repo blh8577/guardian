@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>거래내역</title>
+</head>
+
+<body>
+    <div class="mainicon">
+        <img src="/img/icon.jpg" class="iconimg">
+    </div>
+
+    <div class="pickup_list_content_wrap1">
+
+        <table class="workerlist_table" style="border-collapse: separate; border-spacing: 0 20px;">
+            <th class="workerlist_th111" style="width: 10%;">no</th>
+            <th class="workerlist_th111">신청일</th>
+            <th class="workerlist_th111">상태</th>
+            <th class="workerlist_th111"></th>
+            <th class="workerlist_th111"></th>
+            <tr th:each="request : ${requestList}" class="workerlist_tr1">
+                <td th:text="${requestStat.count}" class="workerlist_td"></td>
+                <td th:text="${request.date}"class="workerlist_td"></td>
+                <td th:text="${request.condition}" class="workerlist_td"></td>
+                <td class="workerlist_td" style="width: 17%;"><button class="past_btn" style="width: 90%" th:onclick="|location.href='@{/request/member/pastRequestDetail(requestIdx=${request.requestIdx})}'|">상세정보</button></td>
+                <td class="workerlist_td" style="width: 17%;"><button class="past_btn" style="width: 90%">녹화</button></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="btn_area">
+        <div class="btn_chi">
+            <a href="/request/member/pastRequestList">
+                <img src="/img/breakdown.jpg" class="btn_img">
+            </a>
+        </div>
+        <div class="btn_chi">
+            <a href="/index">
+                <img src="/img/home.jpg" class="btn_img">
+            </a>
+        </div>
+        <div class="btn_chi">
+            <a href="/member/myprofile">
+                <img src="/img/mypage.jpg" class="btn_img">
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="../css.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>주소 선택</title>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+
+
+        /*]]>*/
+        function haha(a,all){
+            for (i = 0; i < all.length; i++) {
+                var first = document.getElementsByClassName(all[i]);
+                for (j = 0; j < first.length; j++) {
+                    first[j].style.display = "none";
+                }
+            }
+
+            var con = document.getElementsByClassName(a);
+            for (i = 0; i < con.length; i++) {
+                con[i].style.display = "block";
+            }
+        };
+    </script>
+
+</head>
+
+<body>
+<div class="mainicon">
+    <img src="../img/icon.jpg" class="iconimg">
+</div>
+
+<div class="add_div">
+    <span class="add_span">지역을 선택해주세요</span>
+</div>
+
+<div class="pickup_list_content_wrap">
+
+    <div id="box">
+
+        <th:block th:each="address:${addressList}">
+            <li class="add_main">
+                <span th:text="${address.key}" th:onclick="haha([[${address.key}]],[[${addressList.keySet()}]]);"></span>
+                <ul th:class="${address.key}" th:each="addressSmall : ${address.value}" style="display: none">
+                    <li style="margin-left: 5%;"><a href="#" th:href="@{/worker/workerList(address1=${address.key},address2=${addressSmall})}" th:text="${addressSmall}" ></a></li>
+                </ul>
+
+            </li>
+        </th:block>
+
+    </div>
+
+</div>
+
+
+
+<div class="btn_area">
+    <div class="btn_chi">
+        <a href="/request/member/pastRequestList">
+            <img src="/img/breakdown.jpg" class="btn_img">
+        </a>
+    </div>
+    <div class="btn_chi">
+        <a href="/index">
+            <img src="/img/home.jpg" class="btn_img">
+        </a>
+    </div>
+    <div class="btn_chi">
+        <a href="/member/myprofile">
+            <img src="/img/mypage.jpg" class="btn_img">
+        </a>
+    </div>
+</div>
+
+</body>
+
+</html>

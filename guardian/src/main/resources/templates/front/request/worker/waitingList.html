@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>거래내역</title>
+</head>
+
+<body>
+    <div class="mainicon">
+        <img src="/img/icon.jpg" class="iconimg">
+    </div>
+
+    <div class="pickup_list_content_wrap1">
+
+        <table class="workerlist_table" style="border-collapse: separate; border-spacing: 0 20px;">
+            <th class="workerlist_th" style="width: 10%;">no</th>
+            <th class="workerlist_th">이름</th>
+            <th class="workerlist_th">상태</th>
+            <th class="workerlist_th"></th>
+
+            <tr th:each="request : ${requestList}" class="workerlist_tr1">
+                <td th:text="${requestStat.count}" class="workerlist_td"></td>
+                <td th:text="${request.name}" class="workerlist_td"></td>
+                <td th:text="${request.condition}" class="workerlist_td"></td>
+                <td th:onclick="|location.href='@{/request/worker/requestDetail(requestIdx=${request.requestIdx})}'|" class="workerlist_td" style="width: 20%;"><button class="past_btn"
+                        style="width: 100%; height: 30px;">상세정보</button></td>
+            </tr>
+
+        </table>
+
+    </div>
+
+    <div class="btn_area">
+        <div class="btn_chi">
+            <a href="/request/worker/pastMatchingList">
+                <img src="/img/breakdown.jpg" class="btn_img">
+            </a>
+        </div>
+        <div class="btn_chi">
+            <a href="/index">
+                <img src="/img/home.jpg" class="btn_img">
+            </a>
+        </div>
+        <div class="btn_chi">
+            <a href="/worker/myprofile">
+                <img src="/img/mypage.jpg" class="btn_img">
+            </a>
+        </div>
+    </div>
+
+</body>
+
+</html>

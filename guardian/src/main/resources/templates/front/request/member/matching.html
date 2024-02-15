@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css.css">
+    <title>요양보호사 매칭 성공</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+
+<body>
+
+    <div class="mainicon">
+        <img src="/img/icon.jpg" class="iconimg">
+    </div>
+    <div class="order_detail_title">요양보호사 상세정보</div>
+
+
+    <div class="join_profile_wrap1">
+        <div class="join_profile">
+            <img th:src="${worker.selfie}" class="myprofile_profile_img">
+        </div>
+    </div>
+    <div class="pickup_list_content_wrapp">
+        <article>
+            <div class="pickup_list_data_wrap">
+                <ul>
+                    <li>이름: <span th:text="${worker.name}">
+                            배량현
+                        </span></li>
+                    <li>성별: <span  th:text="${worker.sex}">
+                            남
+                        </span></li>
+                    <li>평점: <span  th:text="${worker.grade}">
+                            1.2
+                        </span></li>
+                    <li>전화번호: <span  th:text="${worker.phone}">
+                            <a th:href="|'tel:', ${worker.phone}|" style="color: #999;">010-4816-8363
+                            </a>
+                        </span></li>
+                    <li>
+                        자격증
+                    </li>
+                </ul>
+            </div>
+            <div class="lic_wrap">
+                <img class="lic_img" th:src="${worker.license}">
+            </div>
+        </article>
+    </div>
+
+    <button class="order_detail_contact_btn" onclick="">카메라 보기</button>
+    <button class="order_detail_contact_btn" onclick="document.location.href='tel:010-4816-8363'">전화걸기</button>
+    <button class="order_detail_contact_btn" onclick="document.location.href='/request/member/endOfMatching'">매칭종료</button>
+
+
+</body>
+
+</html>

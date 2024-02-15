@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>요양보호사 마이페이지</title>
+
+    <script>
+        $(document).ready(function(){
+            $(".addcar").click(function(){
+                alert("push");
+                let value_data = $(this).parent().find(".upload-name").val();
+                $.ajax({
+                    type: 'get',
+                    url : '/api/saveCareer',
+                    data: {text:value_data},
+                    dataType:'text',
+                    success: function(data){
+                        alert("경력을 추가하였습니다.");
+                    },error:function(){
+                        alert("추가 실패");
+                    }
+                })
+                $("#my_car").append("<div class=\"join_input_wrap\"><div class= \"filebox\" ><input type=\"text\" class=\"upload-name\" placeholder=\"경력을 등록해주세요\"><label for=\"car\" class='addcar'>등록</label></div></div>");
+                alert("push");
+                ///////////////////
+            });
+        });
+
+        function deleteDiv(num) {
+            var del = "#del" + num;
+            var index =  "#index" + num;
+            var carval = $(index).val();
+            $("div").remove(del);
+            $.ajax({
+                type: 'post',
+                url : '/api/deleteCareer',
+                data: {careerIdx:carval},
+                dataType:'text',
+                success: function(data){
+                    alert("경력을 삭제하였습니다.");
+                },error:function(){
+                    alert("삭제 실패");
+                }
+            })
+        }
+    </script>
+</head>
+
+<body>
+<form action="/worker/update" method="post" enctype="multipart/form-data" id="frm">
+    <div class="join_title">
+        마이페이지
+    </div>
+    <!-- 회원가입 프로필 사진 -->
+    <div class="join_profile_wrap">
+        <div class="join_profile">
+            <img th:src="${session.worker.selfie}" class="myprofile_profile_img">
+        </div>
+    </div>
+
+    <!-- 회원가입 INPUT -->
+    <div class="join_input_title">이름</div>
+    <div class="join_input_wrap">
+        <input type="text" required class="join_input" name="name" th:value="${session.worker.name}" readonly>
+    </div>
+
+    <div class="join_input_title">전화번호</div>
+    <div class="join_input_wrap">
+        <input type="text" required class="join_input" name="phone" th:value="${session.worker.phone}">
+    </div>
+
+    <div class="join_input_title">sns</div>
+    <div class="join_input_wrap">
+        <input type="text" required class="join_input" name="snsType" th:value="${session.worker.snsType}" readonly>
+    </div>
+
+    <div class="join_input_title">주소</div>
+    <div class="join_input_wrap">
+        <input type="text" required class="join_input" th:value="${session.worker.address1} + ' ' + ${session.worker.address2}" readonly>
+        <input type="hidden" name="address1" th:value="${session.worker.address1}">
+        <input type="hidden" name="address2" th:value="${session.worker.address2}">
+    </div>
+
+    <div class="join_input_title">성별</div>
+    <div class="join_input_wrap">
+        <input type="text" required class="join_input" name="sex" th:value="${session.worker.sex}" readonly>
+    </div>
+
+    <div class="join_input_title">평점</div>
+    <div class="join_input_wrap">
+        <input type="text" required class="join_input" th:value="${session.worker.grade==null or session.worker.grade == '' ? '신규':session.worker.grade}" readonly>
+    </div>
+
+    <div class="join_input_title">자기소개</div>
+    <div class="join_input_wrap" style="height: auto;">
+            <textarea id="my_text" class="join_input" name="introduce" style="resize: none; height: 200px;" th:text="${session.worker.introduce}"></textarea>
+    </div>
+
+    <div class="join_input_title">경력</div>
+    <div id="my_car">
+        <div th:each="career : ${careerList}" class="join_input_wrap" th:id="'del'+${career.careerIdx}">
+            <div class="filebox">
+                <input th:value="${career.text}" type="text" class="upload-name" placeholder="경력을 등록해주세요">
+                <input th:value="${career.careerIdx}" type="hidden" th:id="'index' + ${career.careerIdx}">
+                <label for="car" th:onclick="'deleteDiv('+(${career.careerIdx})+' )'">삭제</label>
+            </div>
+        </div>
+        <div class="join_input_wrap">
+            <div class="filebox">
+                <input type="text" class="upload-name" placeholder="경력을 등록해주세요" id="lascar">
+                <label for="car" class="addcar">등록</label>
+            </div>
+        </div>
+    </div>
+
+    <div class="join_input_title">자격증</div>
+    <div class="lic_wrap">
+        <img class="lic_img" th:src="${session.worker.license}">
+    </div>
+
+    <div class="join_input_wrap">
+        <input type="submit" class="join_submit" value="수정 확인">
+    </div>
+</form>
+</body>
+
+</html>

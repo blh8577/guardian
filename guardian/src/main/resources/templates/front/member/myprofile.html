@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>보호자 마이페이지</title>
+</head>
+
+<body>
+    <form action="/index" method="get" enctype="multipart/form-data" id="frm">
+        <div class="join_title">
+            마이페이지
+        </div>
+
+        <!-- 회원가입 INPUT -->
+        <div class="join_input_title">이름</div>
+        <div class="join_input_wrap">
+            <input type="text" required class="join_input" name="name" th:value="${session.member.name}" readonly>
+        </div>
+
+        <div class="join_input_title">전화번호</div>
+        <div class="join_input_wrap">
+            <input type="text" required class="join_input" name="phone" th:value="${session.member.phone}" readonly>
+        </div>
+
+        <div class="join_input_title">sns</div>
+        <div class="join_input_wrap">
+            <input type="text" required class="join_input" name="sns_type" th:value="${session.member.snsType}" readonly>
+        </div>
+        <div class="join_input_wrap">
+            <input type="submit" class="join_submit" value="수정 확인">
+        </div>
+    </form>
+</body>
+
+</html>

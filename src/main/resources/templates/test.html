@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+
+</head>
+<body>
+
+<img id="imgId" th:src="${param.ddddd}" alt="첨부이미지" th:if="${param.ddddd != null}" />
+<form action="/test/test" method="post" enctype="multipart/form-data">
+    <input type="file" name="selfieImg">
+    <input type="file" name="licenseImg">
+    <input type="submit">
+</form>
+
+
+<span th:text="${param.ddddd}" th:if="${param.ddddd != null}">여기</span>
+
+
+
+</body>
+</html>

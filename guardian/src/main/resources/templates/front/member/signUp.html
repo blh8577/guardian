@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" type="text/css" href="/css.css">
+  <script  src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <title>회원가입</title>
+ </head>
+ 
+ <body>
+ <div class="mainicon">
+     <img src="/img/icon.jpg" class="iconimg">
+ </div>
+    <form action="#" method="post" id="frm">
+    <div class="join_title">
+        보호자 회원가입
+    </div>
+
+    <!-- 회원가입 INPUT -->
+    <div class="join_input_title">이름</div>
+    <div class="join_input_wrap">
+        <input type="text" required class="join_input"  name="name" placeholder="이름을 입력해 주세요.">
+    </div>
+
+    <div class="join_input_title">전화번호</div>
+    <div class="join_input_wrap">
+        <input type="text" required class="join_input" name="phone" placeholder="전화번호를 입력해 주세요.">
+    </div>
+
+    <div class="join_input_wrap">
+        <input type="submit" class="join_submit" value="확인">
+    </div>
+    </form>
+ </body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css.css">
+    <title>상세정보</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+        <div class="mainicon">
+            <img src="/img/icon.jpg" class="iconimg">
+        </div>
+    <div class="order_detail_title">신청 상세정보</div>
+
+    <div class="pickup_list_content_wrapp">
+        <article>
+            <div class="pickup_list_data_wrap">
+                <ul>
+                    <li>이름: <span th:text="${request.name}"></span></li>
+                    <li>성별: <span th:text="${request.sex}"></span></li>
+                    <li>질병: <span th:text="${request.disease}"></span></li>
+                    <li>병원: <span th:text="${request.hospital}"></span></li>
+                    <li>신청일: <span th:text="${request.date}"></span></li>
+                    <li>요청사항<span></span></li>
+                    <li>
+                        <span th:text="${request.detail}"></span>
+                    </li>
+                </ul>
+                <br>
+            </div>
+        </article>
+    </div>
+        <div class="btn_area">
+            <div class="btn_chi">
+                <a href="/request/member/pastRequestList">
+                    <img src="/img/breakdown.jpg" class="btn_img">
+                </a>
+            </div>
+            <div class="btn_chi">
+                <a href="/index">
+                    <img src="/img/home.jpg" class="btn_img">
+                </a>
+            </div>
+            <div class="btn_chi">
+                <a href="/member/myprofile">
+                    <img src="/img/mypage.jpg" class="btn_img">
+                </a>
+            </div>
+        </div>
+</body>
+</html>

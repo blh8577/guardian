@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css.css">
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
+    <title>리뷰</title>
+
+</head>
+
+<body>
+    <div class="mainicon">
+        <img src="/img/icon.jpg" class="iconimg">
+    </div>
+    <form action="/request/member/endOfMatching" method="post" enctype="multipart/form-data" id="myform" class="mb-3">
+        <div class="join_title">
+            리뷰를 남겨주세요
+        </div>
+        <div style="text-align: center; margin-bottom: 30px;">
+
+            <fieldset style="text-align: center;">
+                <input type="radio" name="point" value="5" id="rate1"><label for="rate1">★</label>
+                <input type="radio" name="point" value="4" id="rate2"><label for="rate2">★</label>
+                <input type="radio" name="point" value="3" id="rate3"><label for="rate3">★</label>
+                <input type="radio" name="point" value="2" id="rate4"><label for="rate4">★</label>
+                <input type="radio" name="point" value="1" id="rate5"><label for="rate5">★</label>
+            </fieldset>
+
+        </div>
+
+        <div class="join_input_wrap" style="height: auto;">
+            <textarea id="my_text" class="join_input" name="review" style="resize: none; height: 250px;" placeholder="바르고 고운말을 사용해주세요♥"></textarea>
+        </div>
+        <div class="join_input_wrap">
+            <input type="submit" class="join_submit" value="리뷰 남기기">
+        </div>
+
+    </form>
+</body>
+
+</html>
